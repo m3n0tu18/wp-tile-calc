@@ -18,3 +18,14 @@ This project uses vue.js 3 and webpack to run and build. Make sure you have node
 - Q: localhost:9000 isn't changing the content on the fly after you make changes to your App.vue file?
 - A: This is because you need to make sure your wordpress its in WP_DEBUG=true when you ``npm run build``. The way the caching works with the localhost:9000 is that it stores the bundle.js in memory (renamed accordingly to webpack standards) so for it to successfully "HOT" reload, you need to make sure that the wp-config.php file has WP_DEBUG set to true. TO NOTE: Remember to turn off debug when you are ``npm run build`` to properly test on the domain environment. 
 
+
+
+## Dev Notes:
+
+Possible issue with calculation if selecting 400mm tile.
+
+if 1000mm it should be 3 tiles.
+if 1100mm it should be 3 tiles
+if 1200mm it should be 3 tiles
+if 1300mm it should be 3 tiles (currently adding an extra tile)
+if 1400mm it should be 4 tiles.

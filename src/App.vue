@@ -33,6 +33,53 @@
   </div>
 </template>
 
+<!-- <script>
+// import { ref, computed } from "vue";
+
+// export default {
+//   name: "App",
+
+//   setup() {
+//     const tileSize = ref(500); // Default tile size
+//     const horizontalMM = ref(1000); // Horizontal input in mm
+//     const verticalMM = ref(1000); // Vertical input in mm
+
+//     // Computed properties for the number of horizontal and vertical tiles
+//     const horizontalTiles = computed(() =>
+//       Math.ceil(horizontalMM.value / tileSize.value)
+//     );
+//     const verticalTiles = computed(() =>
+//       Math.ceil(verticalMM.value / tileSize.value)
+//     );
+
+//     // Grid items based on the number of tiles
+//     const gridItems = computed(() =>
+//       Array.from(
+//         { length: horizontalTiles.value * verticalTiles.value },
+//         (_, i) => i
+//       )
+//     );
+
+//     // Grid style
+//     const gridStyle = computed(() => ({
+//       "grid-template-columns": `repeat(${horizontalTiles.value}, 25px)`,
+//       "grid-template-rows": `repeat(${verticalTiles.value}, 25px)`,
+//     }));
+
+//     return {
+//       tileSize,
+//       horizontalMM,
+//       verticalMM,
+//       gridItems,
+//       gridStyle,
+//       horizontalTiles,
+//       verticalTiles,
+//     };
+//   },
+// };
+// </script>
+-->
+
 <script>
 import { ref, computed } from "vue";
 
@@ -44,12 +91,77 @@ export default {
     const horizontalMM = ref(1000); // Horizontal input in mm
     const verticalMM = ref(1000); // Vertical input in mm
 
+    // Function to calculate the number of tiles
+    const calculateTiles = (size, tileSize) => {
+      // Calculate the number of full tiles
+      const fullTiles = Math.floor(size / tileSize);
+      // Check if there's any space left that is less than a full tile
+      const needsExtraTile = size % tileSize > 0;
+      return fullTiles + (needsExtraTile ? 1 : 0);
+    };
+
     // Computed properties for the number of horizontal and vertical tiles
     const horizontalTiles = computed(() =>
-      Math.ceil(horizontalMM.value / tileSize.value)
+      calculateTiles(horizontalMM.value, tileSize.value)
     );
     const verticalTiles = computed(() =>
-      Math.ceil(verticalMM.value / tileSize.value)
+      calculateTiles(verticalMM.value, tileSize.value)
+    );
+
+    // Grid items based on the number of tiles
+    const gridItems = computed(() =>
+      Array.from(
+        { length: horizontalTiles.value * verticalTiles.value },
+        (_, i) => i
+      )
+    );
+
+    // Grid style
+    const gridStyle = computed(() => ({
+      "grid-template-columns": `repeat(${horizontalTiles.value}, 25px)`,
+      "grid-template-rows": `repeat(${verticalTiles.value}, 25px)`,
+    }));
+
+    return {
+      tileSize,
+      horizontalMM,
+      verticalMM,
+      gridItems,
+      gridStyle,
+      horizontalTiles,
+      verticalTiles,
+    };
+  },
+};
+</script>
+
+// v2
+<script>
+import { ref, computed } from "vue";
+
+export default {
+  name: "App",
+
+  setup() {
+    const tileSize = ref(500); // Default tile size
+    const horizontalMM = ref(1000); // Horizontal input in mm
+    const verticalMM = ref(1000); // Vertical input in mm
+
+    // Function to calculate the number of tiles
+    const calculateTiles = (size, tileSize) => {
+      // Calculate the number of full tiles
+      const fullTiles = Math.floor(size / tileSize);
+      // Check if there's any space left that is less than a full tile
+      const needsExtraTile = size % tileSize > 0;
+      return fullTiles + (needsExtraTile ? 1 : 0);
+    };
+
+    // Computed properties for the number of horizontal and vertical tiles
+    const horizontalTiles = computed(() =>
+      calculateTiles(horizontalMM.value, tileSize.value)
+    );
+    const verticalTiles = computed(() =>
+      calculateTiles(verticalMM.value, tileSize.value)
     );
 
     // Grid items based on the number of tiles
