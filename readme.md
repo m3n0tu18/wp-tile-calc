@@ -1,5 +1,8 @@
 # Wordpress Plugin Vue Integration.
 
+## Useful Links:
+https://chat.openai.com/c/9cd0f52a-17b8-4d4c-8192-c9f65237c772 - Current chat with GPT to do calculations.
+
 ## Overview
 This project is a boilerplate for your integrations. Make sure you rename the plugin folder and the my-vue-plugin.php to something more suitable. Also change the default plugin information to get this working.
 
