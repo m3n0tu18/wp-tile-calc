@@ -14,6 +14,8 @@
           type="number"
           v-model.number="horizontalMM"
           placeholder="Horizontal (mm)"
+          step="100"
+          min="100"
         />
       </label>
       <label>
@@ -22,6 +24,8 @@
           type="number"
           v-model.number="verticalMM"
           placeholder="Vertical (mm)"
+          step="100"
+          min="100"
         />
       </label>
     </div>
